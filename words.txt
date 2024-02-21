@@ -1,6 +1,6 @@
 bonsoir|Добрый вечер|0
-pardon|извините|1
-merci|спасибо|0
+pardon|извините|3
+merci|спасибо|3
 s'il vous plaît|пожалуйста|1
 au revoir|до свидания|0
 oui|да|1
