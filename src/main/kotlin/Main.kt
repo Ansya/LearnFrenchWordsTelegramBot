@@ -19,9 +19,9 @@ fun main() {
         dictionary.add(word)
     }
 
-    println(dictionary)
-
     do {
+        println()
+        println("***************************************")
         println("Меню:")
         println("1 – Учить слова")
         println("2 – Статистика")
@@ -31,7 +31,7 @@ fun main() {
         val menuitem = readln()
 
         when(menuitem) {
-            "1" -> println("1")
+            "1" -> startToLearnWords(dictionary)
             "2" -> println(getStatistics(dictionary))
             "0" -> println("Выход")
             else -> println("Введен неверный пункт меню, попробуйте еще раз")
@@ -41,8 +41,22 @@ fun main() {
 }
 
 fun getStatistics(dictionary : List<Word>) : String {
-    val learnedWordsCount = dictionary.filter {it.correctAnswersCount == 3}.count()
+    val learnedWordsCount = dictionary.count { it.correctAnswersCount == 3 }
     val allWordsCount = dictionary.count()
     return "Выучено $learnedWordsCount из $allWordsCount слов | " +
             "${(learnedWordsCount * 100) / allWordsCount}%"
+}
+
+fun startToLearnWords(dictionary : List<Word>) {
+    val unlearnedWords = dictionary.filter { it.correctAnswersCount < 3 }
+    if (unlearnedWords.isEmpty()) {
+        println("Вы уже выучили все слова.")
+    } else {
+        val wordsForAnswer = unlearnedWords.shuffled().take(4)
+        val wordToLearn = wordsForAnswer.shuffled().take(1)[0]
+        println("Выберите перевод слова \'${wordToLearn.original}\'")
+        wordsForAnswer.forEachIndexed { i, word ->
+            println("${i + 1} - ${word.translate}")
+        }
+    }
 }
