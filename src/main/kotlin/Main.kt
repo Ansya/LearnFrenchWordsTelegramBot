@@ -1,5 +1,7 @@
 import java.io.File
 
+const val CORRECT_ANSWERS_COUNT_TO_LEARN = 3
+
 data class Word(
     val original :String,
     val translate :String,
@@ -41,14 +43,14 @@ fun main() {
 }
 
 fun getStatistics(dictionary : List<Word>) : String {
-    val learnedWordsCount = dictionary.count { it.correctAnswersCount == 3 }
+    val learnedWordsCount = dictionary.count { it.correctAnswersCount == CORRECT_ANSWERS_COUNT_TO_LEARN }
     val allWordsCount = dictionary.count()
     return "Выучено $learnedWordsCount из $allWordsCount слов | " +
             "${(learnedWordsCount * 100) / allWordsCount}%"
 }
 
 fun startToLearnWords(dictionary : List<Word>) {
-    val unlearnedWords = dictionary.filter { it.correctAnswersCount < 3 }
+    val unlearnedWords = dictionary.filter { it.correctAnswersCount < CORRECT_ANSWERS_COUNT_TO_LEARN }
     if (unlearnedWords.isEmpty()) {
         println("Вы уже выучили все слова.")
     } else {
