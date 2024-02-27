@@ -73,8 +73,16 @@ fun startToLearnWords(dictionary: List<Word>) {
             break
         }
 
-        val wordsForAnswer = unlearnedWords.shuffled().take(NUMBER_OF_WORDS_TO_CHOOSE_ANSWER)
+        var wordsForAnswer = unlearnedWords.shuffled().take(NUMBER_OF_WORDS_TO_CHOOSE_ANSWER)
         val wordToLearn = wordsForAnswer.random()
+        if (wordsForAnswer.count() < NUMBER_OF_WORDS_TO_CHOOSE_ANSWER) {
+            val additionalWordsForAnswer = dictionary
+                .shuffled()
+                .filter { it.original !=  wordToLearn.original }
+                .take(NUMBER_OF_WORDS_TO_CHOOSE_ANSWER - wordsForAnswer.count())
+            wordsForAnswer = wordsForAnswer + additionalWordsForAnswer
+        }
+        wordsForAnswer.shuffled()
         val indexOfWordToLearn = wordsForAnswer.indexOf(wordToLearn)
 
         println("Учим слово \'${wordToLearn.original}\'")
@@ -88,8 +96,7 @@ fun startToLearnWords(dictionary: List<Word>) {
 
         if (answer == indexOfWordToLearn + 1) {
             println("Верно!")
-            val wordPos = dictionary.indexOfFirst { it.original == wordToLearn.original }
-            dictionary[wordPos].apply { correctAnswersCount++ }
+            wordToLearn.correctAnswersCount++
             saveDictionaryToFile(dictionary)
         } else {
             println("Неверный ответ.")
