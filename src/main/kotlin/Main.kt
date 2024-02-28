@@ -78,11 +78,11 @@ fun startToLearnWords(dictionary: List<Word>) {
         if (wordsForAnswer.count() < NUMBER_OF_WORDS_TO_CHOOSE_ANSWER) {
             val additionalWordsForAnswer = dictionary
                 .shuffled()
-                .filter { it.original !=  wordToLearn.original }
+                .filter { it.correctAnswersCount == CORRECT_ANSWERS_COUNT_TO_LEARN }
                 .take(NUMBER_OF_WORDS_TO_CHOOSE_ANSWER - wordsForAnswer.count())
             wordsForAnswer = wordsForAnswer + additionalWordsForAnswer
         }
-        wordsForAnswer.shuffled()
+        wordsForAnswer = wordsForAnswer.shuffled()
         val indexOfWordToLearn = wordsForAnswer.indexOf(wordToLearn)
 
         println("Учим слово \'${wordToLearn.original}\'")
