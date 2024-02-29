@@ -1,6 +1,3 @@
-const val CORRECT_ANSWERS_COUNT_TO_LEARN = 3
-const val NUMBER_OF_WORDS_TO_CHOOSE_ANSWER = 4
-
 data class Word(
     val original: String,
     val translate: String,

@@ -1,7 +1,5 @@
 import java.io.File
 
-const val DICTIONARY_FILE_NAME = "words.txt"
-
 data class Statistics(
     val learnedWordsCount: Int,
     val allWordsCount: Int,
@@ -13,30 +11,34 @@ data class Question(
     val correctAnswer: Word,
 )
 
-class LearnWordsTrainer {
+class LearnWordsTrainer(
+    val dictionaryFileName: String = "words.txt",
+    val correctAnswersCount: Int = 3,
+    val numberOfWordsToChoose: Int = 4,
+) {
 
     private val dictionary = readDictionaryFromFile()
     private var question: Question? = null
 
 
     fun getStatistics(): Statistics {
-        val learnedWordsCount = dictionary.count { it.correctAnswersCount == CORRECT_ANSWERS_COUNT_TO_LEARN }
+        val learnedWordsCount = dictionary.count { it.correctAnswersCount >= correctAnswersCount }
         val allWordsCount = dictionary.count()
         val percent = (learnedWordsCount * 100) / allWordsCount
         return Statistics(learnedWordsCount, allWordsCount, percent)
     }
 
     fun getNextQuestion(): Question? {
-        val unlearnedWords = dictionary.filter { it.correctAnswersCount < CORRECT_ANSWERS_COUNT_TO_LEARN }
+        val unlearnedWords = dictionary.filter { it.correctAnswersCount < correctAnswersCount }
         if (unlearnedWords.isEmpty()) return null
 
-        var wordsForAnswer = unlearnedWords.shuffled().take(NUMBER_OF_WORDS_TO_CHOOSE_ANSWER)
+        var wordsForAnswer = unlearnedWords.shuffled().take(numberOfWordsToChoose)
         val wordToLearn = wordsForAnswer.random()
-        if (wordsForAnswer.count() < NUMBER_OF_WORDS_TO_CHOOSE_ANSWER) {
+        if (wordsForAnswer.count() < numberOfWordsToChoose) {
             val additionalWordsForAnswer = dictionary
                 .shuffled()
-                .filter { it.correctAnswersCount == CORRECT_ANSWERS_COUNT_TO_LEARN }
-                .take(NUMBER_OF_WORDS_TO_CHOOSE_ANSWER - wordsForAnswer.count())
+                .filter { it.correctAnswersCount == correctAnswersCount }
+                .take(numberOfWordsToChoose - wordsForAnswer.count())
             wordsForAnswer = wordsForAnswer + additionalWordsForAnswer
         }
         wordsForAnswer = wordsForAnswer.shuffled()
@@ -59,7 +61,7 @@ class LearnWordsTrainer {
     }
 
     private fun readDictionaryFromFile(): List<Word> {
-        val wordsFile = File(DICTIONARY_FILE_NAME)
+        val wordsFile = File(dictionaryFileName)
         val strings = wordsFile.readLines()
         val dictionary = mutableListOf<Word>()
         strings.forEach {
@@ -75,7 +77,7 @@ class LearnWordsTrainer {
     }
 
     private fun saveDictionaryToFile() {
-        val wordsFile = File(DICTIONARY_FILE_NAME)
+        val wordsFile = File(dictionaryFileName)
         wordsFile.writeText("")
         dictionary.forEach {
             val line = "${it.original}|${it.translate}|${it.correctAnswersCount}\n"
