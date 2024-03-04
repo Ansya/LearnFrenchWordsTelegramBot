@@ -37,7 +37,7 @@ class LearnWordsTrainer(
         if (wordsForAnswer.count() < numberOfWordsToChoose) {
             val additionalWordsForAnswer = dictionary
                 .shuffled()
-                .filter { it.correctAnswersCount == correctAnswersCount }
+                .filter { it.correctAnswersCount >= correctAnswersCount }
                 .take(numberOfWordsToChoose - wordsForAnswer.count())
             wordsForAnswer = wordsForAnswer + additionalWordsForAnswer
         }
