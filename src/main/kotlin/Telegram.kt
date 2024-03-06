@@ -4,13 +4,14 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
 const val FREQUENCY_OF_UPDATES: Long = 2000
+const val TELEGRAM_API_URL = "https://api.telegram.org/bot"
 
 class TelegramBotService(
     val botToken: String,
 ) {
+    private val client = HttpClient.newBuilder().build()
     fun getUpdates(updateId: Int): String {
-        val urlGetUpdates = "https://api.telegram.org/bot$botToken/getUpdates?offset=$updateId"
-        val client = HttpClient.newBuilder().build()
+        val urlGetUpdates = "$TELEGRAM_API_URL$botToken/getUpdates?offset=$updateId"
         val request = HttpRequest.newBuilder().uri(URI.create(urlGetUpdates)).build()
         val response: HttpResponse<String> = client.send(request, HttpResponse.BodyHandlers.ofString())
 
@@ -18,8 +19,7 @@ class TelegramBotService(
     }
 
     fun sendMessage(chatId: String, text: String): String {
-        val urlSendMessage = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=$text"
-        val client = HttpClient.newBuilder().build()
+        val urlSendMessage = "$TELEGRAM_API_URL$botToken/sendMessage?chat_id=$chatId&text=$text"
         val request = HttpRequest.newBuilder().uri(URI.create(urlSendMessage)).build()
         val response: HttpResponse<String> = client.send(request, HttpResponse.BodyHandlers.ofString())
 
