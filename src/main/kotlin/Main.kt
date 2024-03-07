@@ -1,8 +1,3 @@
-data class Word(
-    val original: String,
-    val translate: String,
-    var correctAnswersCount: Int = 0,
-)
 
 fun Question.asConsoleString(): String {
     val variants = this.variants
@@ -55,11 +50,7 @@ fun main() {
 
             "2" -> {
                 val statistics = trainer.getStatistics()
-                println(
-                    "\"Выучено ${statistics.learnedWordsCount} " +
-                            "из ${statistics.allWordsCount} слов |" +
-                            " ${statistics.percent}%"
-                )
+                println(statistics.toString())
             }
 
             "0" -> println("Выход")

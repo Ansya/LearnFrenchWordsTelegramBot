@@ -1,10 +1,22 @@
 import java.io.File
 
+data class Word(
+    val original: String,
+    val translate: String,
+    var correctAnswersCount: Int = 0,
+)
+
 data class Statistics(
     val learnedWordsCount: Int,
     val allWordsCount: Int,
     val percent: Int,
-)
+) {
+    override fun toString(): String {
+        return "Выучено $learnedWordsCount " +
+                "из $allWordsCount слов |" +
+                " $percent%"
+    }
+}
 
 data class Question(
     val variants: List<Word>,
@@ -18,7 +30,7 @@ class LearnWordsTrainer(
 ) {
 
     private val dictionary = readDictionaryFromFile()
-    private var question: Question? = null
+    var question: Question? = null
 
 
     fun getStatistics(): Statistics {
