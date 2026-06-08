@@ -1,16 +1,16 @@
-bonsoir|Добрый вечер|1
-pardon|извините|1
+bonsoir|Добрый вечер|3
+pardon|извините|3
 merci|спасибо|3
-s'il vous plaît|пожалуйста|2
-au revoir|до свидания|2
+s'il vous plaît|пожалуйста|3
+au revoir|до свидания|3
 oui|да|3
 non|нет|3
-bonjour|здравствуйте|2
+bonjour|здравствуйте|3
 chat|кошка|0
-chien|собака|0
+chien|собака|2
 français|француз|2
-école|школа|0
+école|школа|2
 table|стол|0
-crayon|карандаш|0
+crayon|карандаш|2
 stylo|ручка|0
-fenêtre|окно|0
+fenêtre|окно|3
