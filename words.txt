@@ -13,4 +13,7 @@ français|француз|2
 table|стол|0
 crayon|карандаш|2
 stylo|ручка|0
-fenêtre|окно|3
+fenêtre|окно|0
+travail|работа|0
+maison|дом|0
+copine|подруга|0
