@@ -17,3 +17,7 @@ fenêtre|окно|0
 travail|работа|0
 maison|дом|0
 copine|подруга|0
+verre|стакан|0
+cuillère|ложка|0
+assiette|тарелка|0
+couteau|нож|0
