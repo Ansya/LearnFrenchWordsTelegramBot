@@ -17,6 +17,9 @@ fenêtre|окно|0
 travail|работа|0
 maison|дом|0
 copine|подруга|0
+repas|еда|0
+goût|вкус|0
+recette|рецепт|0
 verre|стакан|0
 cuillère|ложка|0
 assiette|тарелка|0
