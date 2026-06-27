@@ -17,3 +17,7 @@ fenêtre|окно|0
 travail|работа|0
 maison|дом|0
 copine|подруга|0
+manger|покушать|0
+cuisine|кулинария|0
+beaucoup de|много|0
+par beaucoup de|очень много|0
