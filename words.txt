@@ -21,3 +21,10 @@ manger|покушать|0
 cuisine|кулинария|0
 beaucoup de|много|0
 par beaucoup de|очень много|0
+repas|еда|0
+goût|вкус|0
+recette|рецепт|0
+verre|стакан|0
+cuillère|ложка|0
+assiette|тарелка|0
+couteau|нож|0
